@@ -1,0 +1,10 @@
+<button routerLink = "/admin" > Tagasi</button>
+
+<div *ngFor="let product of products">
+    <p class = "img"><img src="{{product.imgSrc}}">></p>
+    <p class="name"> {{product.title}}</p>
+    <p class = "price"> {{product.price}}</p>
+    <p class = "category"> {{product.category}}</p>
+    <button (click) = "onDeleteItem(product)" class="deleteItem">Kustuta</button>
+    <button routerLink = "/admin-home/item-eidt/{{product.title}}" class="changeItem">Muuda</button>
+</div>

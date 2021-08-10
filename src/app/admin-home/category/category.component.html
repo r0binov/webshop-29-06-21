@@ -1,0 +1,12 @@
+<button routerLink = "/admin">Tagasi</button>
+
+<form (ngSubmit) = "onSubmit(form)" #form = "ngForm" >
+    <label>Kategooria</label>
+    <input ngModel name = "category" type="text" placeholder="Kategooria nimetus" required>
+    <button [disabled] = "form.invalid"> Lisa Kategooria</button>
+</form>
+
+<div *ngFor="let category of categories">
+    <span>{{category}}</span>
+    <button (click) = "onDeleteCategory(category)">X</button>
+</div>

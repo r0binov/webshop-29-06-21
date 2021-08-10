@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="editItemForm">
+    <label>Pilt</label>
+    <input formControlName="imgSrc" type="text" placeholder="Eseme pilt" required>
+    <label>Nimetus</label>
+    <input formControlName="title" type="text" placeholder="Eseme nimi" required>
+    <label>Hind</label>
+    <input formControlName="price" type="text" placeholder="Eseme Hind" required>
+    <label>Kategooria</label>
+    <select  name="category" formControlName="category">
+        <option disabled selected value="">Vali Kategooria</option>
+        <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+    </select>
+    <button [disabled] = "editItemForm.invalid"> Muuda eset </button>
+</form>

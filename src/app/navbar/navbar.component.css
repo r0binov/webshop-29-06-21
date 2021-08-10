@@ -1,0 +1,9 @@
+.navbar {
+    background-color: cyan;
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+}
+.navbar p {
+    font-size: 70px;
+}

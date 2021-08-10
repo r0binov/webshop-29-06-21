@@ -1,0 +1,14 @@
+<form (ngSubmit)= "onSubmit(itemAddForm)" #itemAddForm="ngForm">
+    <label> Pildi URL </label>
+    <input type="text" ngModel name = "imgSrc" required><br>
+    <label> nimi </label>
+    <input type="text" ngModel name = "title" required><br>
+    <label> Hind </label>
+    <input type="text" ngModel name = "price" required><br>
+    <label> Kategooria </label>
+    <select  name="category" ngModel>
+        <option disabled selected value="">Vali Kategooria</option>
+        <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+    </select>
+    <button type="submit" [disabled] = "itemAddForm.invalid">Sisesta</button>
+</form>

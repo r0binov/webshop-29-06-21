@@ -1,0 +1,14 @@
+<button *ngIf="itemsInCart.length > 0"  (click) = "onEmptyCart()">Tühejnda ostukorv</button>
+
+<div *ngIf="itemsInCart.length == 1" > Ostukorvis on {{itemsInCart.length}}</div>
+<div *ngIf="itemsInCart.length == 0 ">Ostukorv on tühi</div>
+
+<div *ngFor="let inCart of itemsInCart">
+    <p class = "img"><img src="{{inCart.imgSrc}}" alt="">></p>
+    <p class="name"> {{inCart.title}}</p>
+    <p class = "price"> {{inCart.price | itemPrice}}</p>
+    <p class = "category"> {{inCart.category}}</p>
+    <button (click) = "onRemoveFromCart(inCart)">X</button>
+</div>
+
+<div *ngIf="itemsInCart.length > 0">KOKKU: {{sumOfCart | itemPrice}}</div>
