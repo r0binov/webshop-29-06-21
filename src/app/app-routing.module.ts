@@ -8,6 +8,7 @@ import { ItemEidtComponent } from './admin-home/item-eidt/item-eidt.component';
 import { ItemViewComponent } from './admin-home/item-view/item-view.component';
 import { ViewItemComponent } from './home/view-item/view-item.component';
 import { CategoryComponent } from './admin-home/category/category.component';
+import { CarouselSettingsComponent } from './admin-home/carousel-settings/carousel-settings.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "admin-home/item-eidt/:itemId", component: ItemEidtComponent},
   { path: "admin-home/item-view", component: ItemViewComponent},
   { path: "admin-home/category", component: CategoryComponent},
+  { path: "admin-home/carousel-settings", component: CarouselSettingsComponent}
   
 ];
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Carousel } from 'src/app/models/carousel.model';
 import { CarouselService } from 'src/app/services/carousel.service';
 
 @Component({
@@ -8,19 +9,25 @@ import { CarouselService } from 'src/app/services/carousel.service';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
- images2: {url: string, header: string, description: string, alt: string }[] = [];
+ images2: Carousel[] = [];
 
-  constructor(config: NgbCarouselConfig,
+  constructor(private config: NgbCarouselConfig,
     private carouselService: CarouselService) {
     // customize default values of carousels used by this component tree
-    config.interval = 10000;
-    config.wrap = true;
-    config.keyboard = true;
-    config.pauseOnHover = true;
+    
+    
   }
 
   ngOnInit(): void {
     this.images2 = this.carouselService.getAllImages();
+    this.config.interval = this.carouselService.interval;
+    this.config.wrap = this.carouselService.wrap
+    this.config.keyboard = this.carouselService.keyboard
+    this.config.pauseOnHover = this.carouselService.pauseOnHover
+    if(this.images2.length == 1) {
+      this.config.showNavigationArrows = false;
+      this.config.showNavigationIndicators = false;
+    }
   }
 
 }

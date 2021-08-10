@@ -22,6 +22,7 @@ import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { CategoryComponent } from './admin-home/category/category.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './home/carousel/carousel.component';
+import { CarouselSettingsComponent } from './admin-home/carousel-settings/carousel-settings.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CarouselComponent } from './home/carousel/carousel.component';
     ItemPricePipe,
     ShortenTitlePipe,
     CategoryComponent,
-    CarouselComponent
+    CarouselComponent,
+    CarouselSettingsComponent
   ],
   imports: [
     BrowserModule,

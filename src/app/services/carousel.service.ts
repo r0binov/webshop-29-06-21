@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Carousel } from '../models/carousel.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarouselService {
 
-  images2 = [
+  interval = 10000;
+  wrap = true;
+  keyboard = true;
+  pauseOnHover = true;
+
+   images2 = [
     {url: "https://picsum.photos/id/700/900/500",
      header: "10 seconds between slides...",
      description: "This carousel uses customized default values.",
@@ -30,7 +36,17 @@ export class CarouselService {
 
   constructor() { }
 
-  getAllImages() : {url: string, header: string, description: string, alt: string} []  {
+  getAllImages() : Carousel[]  {
     return this.images2.slice();
+  }
+
+  addImage (image: Carousel) {
+    this.images2.push(image);
+    console.log(image)
+  }
+
+  deleteImage (image: Carousel) {
+    let i = this.images2.indexOf(image);
+    this.images2.splice(i, 1);
   }
 }
