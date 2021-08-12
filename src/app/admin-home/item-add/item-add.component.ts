@@ -21,9 +21,9 @@ export class ItemAddComponent implements OnInit {
   }
 
   onSubmit(form:NgForm) {
-    this.itemService.products.push(form.value);
+    this.itemService.getAllItems().push(form.value);
     console.log(form.value);
-    
+  
   }
 
 }

@@ -9,18 +9,33 @@ import { ItemEidtComponent } from '../item-eidt/item-eidt.component';
 })
 export class ItemViewComponent implements OnInit {
 
-  products: any[] = [];
+  products: Item[] = [];
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.products = this.itemService.products;
+    
+    this.itemService.getItemsFromDB().subscribe(
+    (firebaseItems) => {
+    this.products = firebaseItems;
+    this.itemService.saveToServiceFromDB(firebaseItems)});
   }
 
   onDeleteItem (product: Item) {
     let index = this.products.indexOf(product);
-    this.itemService.products.splice(index, 1); 
-    this.products = this.itemService.products;
+    this.itemService.getAllItems().splice(index, 1); 
+    this.itemService.deleteItem(index).subscribe();
   };
+
+  onSendItemsToDB() {
+    this.itemService.saveItemsToDB().subscribe(() => {
+      alert("lisatud");
+    },);
+    console.log("salvestatud")
+  }
+
+  onSaveToServiceFromDB () {
+    this.itemService.saveItemsToDB().subscribe(() => {console.log("lisatud")})
+  }
 
 }

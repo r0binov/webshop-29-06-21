@@ -11,14 +11,14 @@ import { Item } from '../models/item.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products: any[] = [];
+  products: Item[] = [];
 
   constructor(private cartService: CartService,
      private itemService: ItemService,
      private translate: TranslateService) { }
 
   ngOnInit(): void {
-    this.products = this.itemService.products;
+    this.itemService.getItemsFromDB().subscribe(firebaseItems => {this.products = firebaseItems})
   }
 
   addToCart (product: Item) {
@@ -27,20 +27,20 @@ export class HomeComponent implements OnInit {
   }
 
   onSortByNameAsc() {
-    this.itemService.products.sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
+    this.itemService.getAllItems().sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
   }
 
   onSortByNameDesc() {
-    this.itemService.products.sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
+    this.itemService.getAllItems().sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
 
   }
 
   onSortByPriceAsc() {
-    this.itemService.products.sort((currentItem, nextItem) => currentItem.price - nextItem.price)
+    this.itemService.getAllItems().sort((currentItem, nextItem) => currentItem.price - nextItem.price)
   }
 
   onSortByPriceDesc() {
-    this.itemService.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
+    this.itemService.getAllItems().sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
   }
 
 }

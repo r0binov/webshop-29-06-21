@@ -1,5 +1,9 @@
 <button routerLink = "/admin" > Tagasi</button>
 
+<br>
+<button (click) = "onSendItemsToDB()">Salvesta</button>
+<br>
+
 <div *ngFor="let product of products">
     <p class = "img"><img src="{{product.imgSrc}}">></p>
     <p class="name"> {{product.title}}</p>

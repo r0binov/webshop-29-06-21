@@ -21,8 +21,6 @@ export class ViewItemComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.date);
     
-
-
     console.log(this.route)
     console.log(this.route.snapshot)
     console.log(this.route.snapshot.paramMap)
@@ -32,7 +30,7 @@ export class ViewItemComponent implements OnInit {
     if (urlId) {
         this.id = urlId;
         console.log(this.id);
-        let itemFound = this.itemService.products.find(itemsInService => itemsInService.title == this.id)
+        let itemFound = this.itemService.getAllItems().find(itemsInService => itemsInService.title == this.id)
         if (itemFound) {
           this.item = itemFound;
           console.log(this.item);
@@ -43,5 +41,6 @@ export class ViewItemComponent implements OnInit {
 
     }
   }
+ 
 
 }
