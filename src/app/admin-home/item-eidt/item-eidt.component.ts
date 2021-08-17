@@ -24,31 +24,34 @@ export class ItemEidtComponent implements OnInit {
     private categoryService: CategoryServiceService) { }
 
   ngOnInit(): void {
-    let urlId = this.route.snapshot.paramMap.get("itemId");
-
+    
     this.categories = this.categoryService.getCategories();
-
+    
+    let urlId = this.route.snapshot.paramMap.get("itemId");
     if (urlId) {
       this.id = urlId;
-      let itemFound = this.itemService.getAllItems().find(itemInService => itemInService.title == this.id)
+      
+       this.itemService.getItemsFromDB().subscribe((firebaseItems) => {
+        this.itemService.saveToServiceFromDB(firebaseItems);
+        
+        
+        let itemFound = this.itemService.getAllItems().find(itemInService => itemInService.title == this.id)
+        if(itemFound) {
+          this.item = itemFound;
+        }
+        this.editItemForm = new FormGroup ({
+        
+          imgSrc: new FormControl(this.item.imgSrc),
+          title: new FormControl(this.item.title),
+          price: new FormControl(this.item.price),
+          category: new FormControl(this.item.category)
+    
+        });
 
-      if(itemFound) {
-        this.item = itemFound;
-      } else {
-        alert("Eset ei leitud");
-      }
+      });
+     }
     }
 
-    this.editItemForm = new FormGroup ({
-      
-      imgSrc: new FormControl(this.item.imgSrc),
-      title: new FormControl(this.item.title),
-      price: new FormControl(this.item.price),
-      category: new FormControl(this.item.category)
-
-    });
-
-  }
 
   onSubmit() {
     if(this.editItemForm.valid) {

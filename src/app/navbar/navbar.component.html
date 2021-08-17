@@ -1,7 +1,12 @@
 <div class = "navbar">
-<p routerLink = "">Ebay</p>
-<a routerLink = "cart"> Ostukorv </a>
-<a routerLink = "admin">{{"Mine admin lehele" | translate}}</a>
+    <p routerLink = "">Ebay</p>
+    <a routerLink = "cart"> {{'Ostukorv' | translate }} {{sumOfCart | itemPrice}} </a>
+    <a routerLink = "admin">  {{'Mine admini lehele' | translate }}</a>
+    
+    <div class="language-buttons">
+        <button (click)="useLanguage('en')">en</button>
+        <button (click)="useLanguage('ee')">ee</button>
+    </div>
+
 </div>
-<button (click)="useLanguage('en')">en</button>
-<button (click)="useLanguage('ee')">ee</button>
+    

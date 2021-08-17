@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Carousel } from 'src/app/models/carousel.model';
 import { CarouselService } from 'src/app/services/carousel.service';
 
@@ -36,7 +36,7 @@ export class CarouselSettingsComponent implements OnInit {
   }
 
   onSubmitConfig() {
-    this.carouselService.interval = this.carouselConfigForm.value.interval;
+    this.carouselService.interval = this.carouselConfigForm.value.interval, Validators.required;
     this.carouselService.keyboard = this.carouselConfigForm.value.keyboard;
     this.carouselService.pauseOnHover = this.carouselConfigForm.value.pauseOnHover;
     this.carouselService.wrap = this.carouselConfigForm.value.wrap;

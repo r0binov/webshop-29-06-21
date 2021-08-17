@@ -27,20 +27,25 @@ export class ViewItemComponent implements OnInit {
 
     let urlId = this.route.snapshot.paramMap.get("itemId");
 
-    if (urlId) {
-        this.id = urlId;
-        console.log(this.id);
-        let itemFound = this.itemService.getAllItems().find(itemsInService => itemsInService.title == this.id)
-        if (itemFound) {
-          this.item = itemFound;
-          console.log(this.item);
+    
+      this.itemService.getItemsFromDB().subscribe((firebaseItems) => {
+        this.itemService.saveToServiceFromDB(firebaseItems);
+        if (urlId) {
+          let itemFound = this.itemService.getItem(urlId)
+            if (itemFound) {
+              this.item = itemFound;
+              console.log(this.item);
+            }
+        
         }
+      })
+        
 
-        console.log(this.id)
-        console.log(this.item)
+      console.log(this.id)
+       console.log(this.item)
 
+    
     }
-  }
  
 
 }

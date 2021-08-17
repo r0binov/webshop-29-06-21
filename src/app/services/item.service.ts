@@ -13,6 +13,10 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
+  getItem(id: string): Item | undefined {
+    return this.products.find(item => item.title == id)
+  }
+  
   getAllItems() : Item[]  {
     return this.products.slice();
   }

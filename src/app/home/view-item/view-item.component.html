@@ -2,4 +2,13 @@
 
 {{item | json}}
 
+<br> <br>
+<div *ngIf="item">{{item.title}} <br> <br>
+    <img src="{{item.imgSrc}}" alt=""> <br> <br>
+     {{item.price}} € <br> <br>
+    {{item.category}} <br> <br>
+</div>
+
+
+
 {{date | date}}

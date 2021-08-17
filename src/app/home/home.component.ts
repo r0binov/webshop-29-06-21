@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
 
   addToCart (product: Item) {
       console.log(product);
-      this.cartService.productsInCart.push(product);
+      this.cartService.addToCart(product);
+      this.cartService.cartChanged.next();
   }
 
   onSortByNameAsc() {

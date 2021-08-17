@@ -1,6 +1,6 @@
-<button *ngIf="itemsInCart.length > 0"  (click) = "onEmptyCart()">Tühejnda ostukorv</button>
+<button *ngIf="itemsInCart.length > 0"  (click) = "onEmptyCart()">Tühejnda ostukorv</button> <br> <br>
 
-<div *ngIf="itemsInCart.length == 1" > Ostukorvis on {{itemsInCart.length}}</div>
+<div *ngIf="itemsInCart.length >= 1" > Ostukorvis on {{itemsInCart.length}}</div>
 <div *ngIf="itemsInCart.length == 0 ">Ostukorv on tühi</div>
 
 <div *ngFor="let inCart of itemsInCart">
