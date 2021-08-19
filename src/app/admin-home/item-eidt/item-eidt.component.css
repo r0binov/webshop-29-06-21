@@ -4,4 +4,8 @@ form {
     width: 50%;
     text-align: center;
     justify-content: center;
+    margin-left: 25%
+}
+.checkbox {
+    margin-left: 50%;
 }

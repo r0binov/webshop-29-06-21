@@ -1,4 +1,4 @@
-<button routerLink = "/admin"> Tagasi</button>
+<app-btn-back [back]="'/admin'"></app-btn-back>
 
 <form (ngSubmit) = "onSubmitConfig()" [formGroup]="carouselConfigForm">
     <label>Kiirus</label>

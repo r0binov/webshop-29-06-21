@@ -1,3 +1,5 @@
+<app-btn-back [back] = "'/admin'" ></app-btn-back>
+
 <form (ngSubmit)= "onSubmit(itemAddForm)" #itemAddForm="ngForm">
     <label> Pildi URL </label>
     <input type="text" ngModel name = "imgSrc" required><br>
@@ -10,5 +12,6 @@
         <option disabled selected value="">Vali Kategooria</option>
         <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
     </select>
+    <input type="text" ngModel name = "isActive" selected hidden type="checkbox"><br>
     <button type="submit" [disabled] = "itemAddForm.invalid">Sisesta</button>
 </form>

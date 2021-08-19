@@ -1,3 +1,11 @@
 .main {
     margin-left: 30px;
 }
+
+.active {
+    border: 2px, darkorange
+}
+
+.inactive {
+    border: 2px, red;
+}

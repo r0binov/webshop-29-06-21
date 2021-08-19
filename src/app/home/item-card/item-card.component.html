@@ -1,0 +1,12 @@
+<button>
+    <span *ngIf="!product.isActive"> Aktiivseks</span>
+    <span *ngIf="product.isActive"> Mitte aktiivseks</span>
+</button>
+
+<div routerLink = "item/{{product.title}}">
+    <p class = "img"><img src="{{product.imgSrc}}" alt="">></p>
+    <p class="name"> {{product.title | shortenTitle: 4}}</p>
+    <p class = "price"> {{product.price | itemPrice}}</p>
+</div> 
+
+<button (click) = "onAddToCart(product)" class="addCart"> {{"Lisa ostukorvi" | translate}} </button>

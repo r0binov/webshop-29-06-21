@@ -44,8 +44,8 @@ export class ItemEidtComponent implements OnInit {
           imgSrc: new FormControl(this.item.imgSrc),
           title: new FormControl(this.item.title),
           price: new FormControl(this.item.price),
-          category: new FormControl(this.item.category)
-    
+          category: new FormControl(this.item.category),
+          isActive: new FormControl(this.item.isActive)
         });
 
       });
@@ -55,8 +55,15 @@ export class ItemEidtComponent implements OnInit {
 
   onSubmit() {
     if(this.editItemForm.valid) {
-      let index = this.itemService.getAllItems().findIndex(item => item.title == this.id)
-      this.itemService.editItem(index, this.editItemForm.value).subscribe(() =>
+      let index = this.itemService.getAllItems().findIndex(item => item.title == this.id);
+      let item = new Item(
+        this.editItemForm.value.imgSrc,
+        this.editItemForm.value.title,
+        this.editItemForm.value.price,
+        this.editItemForm.value.category,
+        this.editItemForm.value.isActive,
+      );
+      this.itemService.editItem(index, item).subscribe(() =>
        {this.router.navigateByUrl("/admin-home/item-view")});
     }
   }

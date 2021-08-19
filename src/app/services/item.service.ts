@@ -43,4 +43,11 @@ export class ItemService {
     this.products[index] = item;
     return this.saveItemsToDB();
   }
+
+  addItem(item: Item) {
+    this.products.push(item)
+    console.log(item);
+    this.saveItemsToDB().subscribe();
+    
+  }
 }

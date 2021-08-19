@@ -21,27 +21,21 @@ export class HomeComponent implements OnInit {
     this.itemService.getItemsFromDB().subscribe(firebaseItems => {this.products = firebaseItems})
   }
 
-  addToCart (product: Item) {
-      console.log(product);
-      this.cartService.addToCart(product);
-      this.cartService.cartChanged.next();
-  }
-
   onSortByNameAsc() {
-    this.itemService.getAllItems().sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
+    this.products.sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
   }
 
   onSortByNameDesc() {
-    this.itemService.getAllItems().sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
+    this.products.sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
 
   }
 
   onSortByPriceAsc() {
-    this.itemService.getAllItems().sort((currentItem, nextItem) => currentItem.price - nextItem.price)
+    this.products.sort((currentItem, nextItem) => currentItem.price - nextItem.price)
   }
 
   onSortByPriceDesc() {
-    this.itemService.getAllItems().sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
+    this.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
   }
 
 }

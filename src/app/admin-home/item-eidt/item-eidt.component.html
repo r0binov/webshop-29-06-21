@@ -1,3 +1,5 @@
+<app-btn-back [back] = "'/admin-home/item-view'" ></app-btn-back>
+
 <form *ngIf="editItemForm" (ngSubmit)="onSubmit()" [formGroup]="editItemForm">
     <label>Pilt</label>
     <input formControlName="imgSrc" type="text" placeholder="Eseme pilt" required>
@@ -9,6 +11,9 @@
     <select  name="category" formControlName="category">
         <option disabled selected value="">Vali Kategooria</option>
         <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
-    </select>
+    </select> <br> <br>
+    <label> Näita eset</label>
+    <input formControlName="isActive" type="checkbox" class="checkbox">
+    <br>
     <button [disabled] = "editItemForm.invalid"> Muuda eset </button>
 </form>

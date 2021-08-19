@@ -23,6 +23,8 @@ import { CategoryComponent } from './admin-home/category/category.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { CarouselSettingsComponent } from './admin-home/carousel-settings/carousel-settings.component';
+import { ItemCardComponent } from './home/item-card/item-card.component';
+import { BtnBackComponent } from './admin-home/btn-back/btn-back.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { CarouselSettingsComponent } from './admin-home/carousel-settings/carous
     ShortenTitlePipe,
     CategoryComponent,
     CarouselComponent,
-    CarouselSettingsComponent
+    CarouselSettingsComponent,
+    ItemCardComponent,
+    BtnBackComponent
   ],
   imports: [
     BrowserModule,
