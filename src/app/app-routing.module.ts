@@ -9,17 +9,25 @@ import { ItemViewComponent } from './admin-home/item-view/item-view.component';
 import { ViewItemComponent } from './home/view-item/view-item.component';
 import { CategoryComponent } from './admin-home/category/category.component';
 import { CarouselSettingsComponent } from './admin-home/carousel-settings/carousel-settings.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "cart", component: CartComponent},
   { path: "item/:itemId", component: ViewItemComponent},
-  { path: "admin", component: AdminHomeComponent},
-  { path: "admin-home/item-add", component: ItemAddComponent},
-  { path: "admin-home/item-eidt/:itemId", component: ItemEidtComponent},
-  { path: "admin-home/item-view", component: ItemViewComponent},
-  { path: "admin-home/category", component: CategoryComponent},
-  { path: "admin-home/carousel-settings", component: CarouselSettingsComponent}
+  { path: "logi-sisse", component: LoginComponent },
+  { path: "admin", canActivateChild: [AuthGuard], children: [ 
+    { path: "", component: AdminHomeComponent},
+    { path: "item-add", component: ItemAddComponent},
+    { path: "item-edit/:itemId", component: ItemEidtComponent},
+    { path: "item-view", component: ItemViewComponent},
+    { path: "category", component: CategoryComponent},
+    { path: "carousel-settings", component: CarouselSettingsComponent},
+    { path: "registreeru", component: SignupComponent },
+  ]},
+
   
 ];
 

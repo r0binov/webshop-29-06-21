@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Carousel } from '../models/carousel.model';
 
@@ -34,7 +35,7 @@ export class CarouselService {
    }
    ];
 
-  constructor() { }
+  constructor(private httpService: HttpClient) { }
 
   getAllImages() : Carousel[]  {
     return this.images2.slice();
@@ -48,5 +49,9 @@ export class CarouselService {
   deleteImage (image: Carousel) {
     let i = this.images2.indexOf(image);
     this.images2.splice(i, 1);
+  }
+
+  addImageToDB() {
+    
   }
 }

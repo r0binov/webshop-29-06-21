@@ -1,0 +1,11 @@
+<ngb-alert *ngIf="error != '' " type= "danger" (closed) = "onClose()"> {{error}}</ngb-alert>
+<app-loading></app-loading>
+
+<form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+    
+    <label>email</label>
+    <input type="text" ngModel name="email" required>
+    <label> parool</label>
+    <input type="password" ngModel name="password" required>
+    <button>Logi sisse</button>
+</form>

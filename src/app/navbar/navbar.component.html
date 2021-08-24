@@ -1,7 +1,10 @@
 <div class = "navbar">
     <p routerLink = "">Ebay</p>
     <a routerLink = "cart"> {{'Ostukorv' | translate }} {{sumOfCart | itemPrice}} </a>
-    <a routerLink = "admin">  {{'Mine admini lehele' | translate }}</a>
+    <a *ngIf="isLoggedIn" routerLink = "admin">  {{'Mine admini lehele' | translate }}</a>
+    <a *ngIf="!isLoggedIn" routerLink = "admin">  {{'Logi sisse' | translate }}</a>
+    <a *ngIf="isLoggedIn" (click) = "onLogOut()">  {{'Logi Välja' | translate }}</a>
+    
     
     <div class="language-buttons">
         <button (click)="useLanguage('en')">en</button>

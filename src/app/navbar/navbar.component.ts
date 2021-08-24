@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import { AuthService } from '../auth/auth.service';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -8,14 +9,23 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  isLoggedIn = false;
   sumOfCart = 0;
 
   constructor(private translate: TranslateService,
     private cartService: CartService,
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = sessionStorage.getItem("userData") ? true : false;
+   
+    this.authService.loggedInChanged.subscribe(() => {
+    this.isLoggedIn = sessionStorage.getItem("userData") ? true : false;
+   })
+   
+    
+
     let lang = localStorage.getItem("language")
     if (lang) {
       this.translate.use(lang);
@@ -47,5 +57,8 @@ export class NavbarComponent implements OnInit {
       });
     }
   
-
+  onLogOut() {
+    sessionStorage.removeItem("userData");
+    this.isLoggedIn = false;
+  }
 }
