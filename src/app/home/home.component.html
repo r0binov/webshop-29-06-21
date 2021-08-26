@@ -7,11 +7,20 @@
 <button (click) = "onSortByPriceAsc()">Hinna järgi kasvavalt</button>
 <button (click) = "onSortByPriceDesc()">Hinna järgi kahanevalt</button>
 
+
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div *ngFor="let category of products | uniqueCategory">{{ category }}</div>
+
 <div
-    [ngClass] = "{'active': item.isActive, 'inactive': !item.isActive}"
+    [ngClass] = "{
+    'active': item.isActive && isLoggedIn,
+    'inactive': !item.isActive && isLoggedIn}"
     *ngFor="let item of products">
     
-    <app-item-card class="item" *ngIf="item.isActive" [product]="item">
-        
-    </app-item-card>
+    <app-item-card  *ngIf="isLoggedIn || (!isLoggedIn && item.isActive)" 
+    [product]="item" [isLoggedIn]= "isLoggedIn" (activeChangedEvent) = "saveToDBOnActiveChanged($event)">
+
+    </app-item-card>    
+    
 </div> 

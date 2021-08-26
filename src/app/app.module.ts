@@ -28,6 +28,7 @@ import { BtnBackComponent } from './admin-home/btn-back/btn-back.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoadingComponent } from './loading/loading.component';
+import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { LoadingComponent } from './loading/loading.component';
     BtnBackComponent,
     LoginComponent,
     SignupComponent,
-    LoadingComponent
+    LoadingComponent,
+    UniqueCategoryPipe
   ],
   imports: [
     BrowserModule,

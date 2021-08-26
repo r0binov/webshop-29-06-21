@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: "admin", canActivateChild: [AuthGuard], children: [ 
     { path: "", component: AdminHomeComponent},
     { path: "item-add", component: ItemAddComponent},
-    { path: "item-edit/:itemId", component: ItemEidtComponent},
+    { path: "item-eidt/:itemId", component: ItemEidtComponent},
     { path: "item-view", component: ItemViewComponent},
     { path: "category", component: CategoryComponent},
     { path: "carousel-settings", component: CarouselSettingsComponent},

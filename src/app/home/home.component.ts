@@ -4,6 +4,7 @@ import { CartService } from '../services/cart.service';
 import { ItemService } from '../services/item.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Item } from '../models/item.model';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,13 +13,27 @@ import { Item } from '../models/item.model';
 })
 export class HomeComponent implements OnInit {
   products: Item[] = [];
+  isLoading = false;
+  isLoggedIn = false;
 
   constructor(private cartService: CartService,
      private itemService: ItemService,
-     private translate: TranslateService) { }
+     private translate: TranslateService,
+     private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.itemService.getItemsFromDB().subscribe(firebaseItems => {this.products = firebaseItems})
+    
+    this.isLoggedIn = sessionStorage.getItem("userData") ? true : false;
+
+    this.authService.loggedInChanged.subscribe(() => {
+       this.isLoggedIn = sessionStorage.getItem("userData") ? true : false;
+    });
+
+    this.isLoading = true;
+    this.itemService.getItemsFromDB().subscribe(firebaseItems => {
+      this.isLoading = false;
+      this.products = firebaseItems;
+      this.itemService.saveToServiceFromDB(firebaseItems)});
   }
 
   onSortByNameAsc() {
@@ -37,5 +52,11 @@ export class HomeComponent implements OnInit {
   onSortByPriceDesc() {
     this.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
   }
+
+  saveToDBOnActiveChanged(item: Item) {
+    console.log(item);
+    this.itemService.saveItemsToDB().subscribe();
+  }
+
 
 }

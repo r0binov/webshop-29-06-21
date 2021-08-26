@@ -64,7 +64,7 @@ export class ItemEidtComponent implements OnInit {
         this.editItemForm.value.isActive,
       );
       this.itemService.editItem(index, item).subscribe(() =>
-       {this.router.navigateByUrl("/admin-home/item-view")});
+       {this.router.navigateByUrl("/admin/item-view")});
     }
   }
 

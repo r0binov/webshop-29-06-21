@@ -59,6 +59,6 @@ export class NavbarComponent implements OnInit {
   
   onLogOut() {
     sessionStorage.removeItem("userData");
-    this.isLoggedIn = false;
+    this.authService.loggedInChanged.next()
   }
 }
