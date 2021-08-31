@@ -70,7 +70,7 @@ import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
         }),
     NgbModule
   ],
-  providers: [],
+  providers: [UniqueCategoryPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

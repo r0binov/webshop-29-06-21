@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemViewComponent } from '../admin-home/item-view/item-view.component';
 import { CartService } from '../services/cart.service';
 import { ItemService } from '../services/item.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Item } from '../models/item.model';
 import { AuthService } from '../auth/auth.service';
+import { UniqueCategoryPipe } from '../pipes/unique-category.pipe';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +15,15 @@ export class HomeComponent implements OnInit {
   products: Item[] = [];
   isLoading = false;
   isLoggedIn = false;
+  categories: string[] = [];
+  isPriceSortAsc = true;
+  isTitleSortAsc = true;
 
   constructor(private cartService: CartService,
      private itemService: ItemService,
      private translate: TranslateService,
-     private authService: AuthService) { }
+     private authService: AuthService,
+     private uniqueCategoryPipe: UniqueCategoryPipe) { }
 
   ngOnInit(): void {
     
@@ -33,30 +37,69 @@ export class HomeComponent implements OnInit {
     this.itemService.getItemsFromDB().subscribe(firebaseItems => {
       this.isLoading = false;
       this.products = firebaseItems;
-      this.itemService.saveToServiceFromDB(firebaseItems)});
+      this.itemService.saveToServiceFromDB(firebaseItems)
+      this.categories = this.uniqueCategoryPipe.transform(this.products);
+    });
   }
 
-  onSortByNameAsc() {
-    this.products.sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
+  onSortByName() {
+    if(this.isTitleSortAsc) {
+      this.products.sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
+      this.isTitleSortAsc = false;
+    } else {
+      this.products.sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
+      this.isTitleSortAsc = true;
+    }
   }
 
-  onSortByNameDesc() {
-    this.products.sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
+    //onSortByNameAsc() {
+      //this.products.sort((currentItem, nextItem) => currentItem.title.localeCompare(nextItem.title));
+   // }
 
+    //onSortByNameDesc() {
+    //  this.products.sort((currentItem, nextItem) => nextItem.title.localeCompare(currentItem.title));
+  //
+    //}
+  onSortByPrice() {
+    if (this.isPriceSortAsc) {
+      this.products.sort((currentItem, nextItem) => currentItem.price - nextItem.price);
+      this.isPriceSortAsc = false;
+    } else {
+      this.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price);
+      this.isPriceSortAsc = true;
+    }
   }
 
-  onSortByPriceAsc() {
-    this.products.sort((currentItem, nextItem) => currentItem.price - nextItem.price)
-  }
 
-  onSortByPriceDesc() {
-    this.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
-  }
+    //onSortByPriceAsc() {
+     // this.products.sort((currentItem, nextItem) => currentItem.price - nextItem.price)
+   // }
+
+  //onSortByPriceDesc() {
+    //  this.products.sort((currentItem, nextItem) => nextItem.price  - currentItem.price)
+    //}
 
   saveToDBOnActiveChanged(item: Item) {
     console.log(item);
     this.itemService.saveItemsToDB().subscribe();
   }
+
+  onCategoryClick(category: string) {
+    
+    
+      this.itemService.getItemsFromDB().subscribe(firebaseItems => {
+        this.isLoading = false;
+        this.products = firebaseItems;
+        this.itemService.saveToServiceFromDB(firebaseItems)
+      if (category != 'all') {
+        this.products = this.products.filter(item => item.category == category)
+    }
+
+  });
+
+    console.log(category);
+  }
+
 
 
 }

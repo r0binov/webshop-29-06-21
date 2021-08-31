@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
     calculateSumOfCart() {
       this.sumOfCart = 0;
       this.cartService.getItemsFromCart().forEach(itemInCart => {
-        this.sumOfCart += itemInCart.price
+        this.sumOfCart += itemInCart.product.price
       });
     }
   

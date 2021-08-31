@@ -8,8 +8,10 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  itemsInCart: Item[] = [];
+  itemsInCart: { product :Item, quantity: number }[] = [];
   sumOfCart = 0;
+  itemCount = 0;
+
   
 
   constructor(private cartService: CartService) { }
@@ -18,7 +20,7 @@ export class CartComponent implements OnInit {
     this.itemsInCart = this.cartService.getItemsFromCart();
     this.sumOfCart = 0;
     this.itemsInCart.forEach( itemInCart => {
-      this.sumOfCart += itemInCart.price;
+      this.sumOfCart += itemInCart.product.price;
     });
   }
 
@@ -30,16 +32,21 @@ export class CartComponent implements OnInit {
 
   };
 
-  onRemoveFromCart (product: Item) {
+  onRemoveFromCart (product: { product :Item, quantity: number }) {
     let index = this.itemsInCart.indexOf(product);
-    this.cartService.getItemsFromCart().splice(index, 1); 
+    this.cartService.deleteOneFromCart(index)
+    this.itemsInCart = this.cartService.getItemsFromCart();
     this.calculateSumOfCart();
+    this.cartService.cartChanged.next();
+    console.log(index);
+    
   };
 
   calculateSumOfCart() {
     this.sumOfCart = 0;
     this.itemsInCart.forEach(itemInCart => {
-      this.sumOfCart += itemInCart.price
+      this.sumOfCart += itemInCart.product.price * itemInCart.quantity;
+      this.itemCount += itemInCart.quantity
     });
   }
 

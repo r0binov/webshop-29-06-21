@@ -6,7 +6,7 @@ import { Item } from '../models/item.model';
   providedIn: 'root'
 })
 export class CartService {
-  private productsInCart: Item[] = [];
+  private productsInCart: { product :Item, quantity: number } [] = [];
   cartChanged  = new Subject();
 
   constructor() { }
@@ -16,12 +16,20 @@ export class CartService {
   }
 
   addToCart(item: Item): void {
-    this.productsInCart.push(item);
+    let cartItem = this.productsInCart.find(productInCart => productInCart.product.title == item.title);
+    
+    if(cartItem){
+      cartItem.quantity++;
+    } else {
+      this.productsInCart.push({ product :item, quantity: 1 });
+    }
   }
 
   emptyCart(): void {
     this.productsInCart = [];
   }
 
-  
+  deleteOneFromCart(index: number) {
+    this.productsInCart.splice(index, 1)
+  }
 }

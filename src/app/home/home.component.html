@@ -2,15 +2,14 @@
 <app-carousel></app-carousel>
 
 <div>Sorteeri</div>
-<button (click) = "onSortByNameAsc()">Tähestiku järgi kasvavalt</button>
-<button (click) = "onSortByNameDesc()">Tähestiku järgi kahanevalt</button>
-<button (click) = "onSortByPriceAsc()">Hinna järgi kasvavalt</button>
-<button (click) = "onSortByPriceDesc()">Hinna järgi kahanevalt</button>
+<button (click) = "onSortByName()">Tähestiku järgi </button>
+<button (click) = "onSortByPrice()">Hinna järgi</button>
 
 
 <app-loading *ngIf="isLoading"></app-loading>
+<div (click) = "onCategoryClick('all')" > Kõik kategooriad </div> <br>
 
-<div *ngFor="let category of products | uniqueCategory">{{ category }}</div>
+<div (click) = "onCategoryClick(category)" *ngFor="let category of categories">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</div>
 
 <div
     [ngClass] = "{

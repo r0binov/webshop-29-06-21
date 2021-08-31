@@ -1,13 +1,15 @@
 <button *ngIf="itemsInCart.length > 0"  (click) = "onEmptyCart()">Tühejnda ostukorv</button> <br> <br>
 
-<div *ngIf="itemsInCart.length >= 1" > Ostukorvis on {{itemsInCart.length}}</div>
-<div *ngIf="itemsInCart.length == 0 ">Ostukorv on tühi</div>
+<div *ngIf="itemCount >= 1" > Ostukorvis on{{itemCount}}</div>
+<div *ngIf="itemCount == 0 ">Ostukorv on tühi</div>
 
 <div *ngFor="let inCart of itemsInCart">
-    <p class = "img"><img src="{{inCart.imgSrc}}" alt="">></p>
-    <p class="name"> {{inCart.title}}</p>
-    <p class = "price"> {{inCart.price | itemPrice}}</p>
-    <p class = "category"> {{inCart.category}}</p>
+    <p class = "img"><img src="{{inCart.product.imgSrc}}" alt="">></p>
+    <p class="name"> {{inCart.product.title}}</p>
+    <p class = "price"> {{inCart.product.price | itemPrice}}</p>
+    <p class="quantity"> {{inCart.quantity}}</p>
+    <p class="total"> {{inCart.product.price * inCart.quantity | itemPrice}}</p>
+    <p class = "category"> {{inCart.product.category}}</p>
     <button (click) = "onRemoveFromCart(inCart)">X</button>
 </div>
 
