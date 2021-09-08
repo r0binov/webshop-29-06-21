@@ -1,25 +1,30 @@
+<body>
+    
 
 <app-carousel></app-carousel>
 
-<div>Sorteeri</div>
-<button (click) = "onSortByName()">Tähestiku järgi </button>
-<button (click) = "onSortByPrice()">Hinna järgi</button>
-
+<div class="filter-bar">
+    <div>Sorteeri</div>
+    <button (click) = "onSortByName()">Tähestiku järgi </button>
+    <button (click) = "onSortByPrice()">Hinna järgi</button>
+</div>
 
 <app-loading *ngIf="isLoading"></app-loading>
-<div (click) = "onCategoryClick('all')" > Kõik kategooriad </div> <br>
+<div class="categories-all" (click) = "onCategoryClick('all')" > Kõik kategooriad </div> <br>
 
-<div (click) = "onCategoryClick(category)" *ngFor="let category of categories">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</div>
+<div class="categories-filter" (click) = "onCategoryClick(category)" *ngFor="let category of categories">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</div> <br>
 
 <div
     [ngClass] = "{
     'active': item.isActive && isLoggedIn,
     'inactive': !item.isActive && isLoggedIn}"
-    *ngFor="let item of products">
+    *ngFor="let item of products" class="col-xs-6 col-md-4">
     
     <app-item-card  *ngIf="isLoggedIn || (!isLoggedIn && item.isActive)" 
-    [product]="item" [isLoggedIn]= "isLoggedIn" (activeChangedEvent) = "saveToDBOnActiveChanged($event)">
+    [product]="item" [isLoggedIn]= "isLoggedIn" (activeChangedEvent) = "saveToDBOnActiveChanged($event)" >>
 
     </app-item-card>    
     
 </div> 
+
+</body>

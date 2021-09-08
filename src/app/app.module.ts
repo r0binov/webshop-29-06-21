@@ -29,6 +29,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoadingComponent } from './loading/loading.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
+import { ImageEditComponent } from './admin-home/carousel-settings/carousel-settings/image-edit/image-edit.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
     LoginComponent,
     SignupComponent,
     LoadingComponent,
-    UniqueCategoryPipe
+    UniqueCategoryPipe,
+    ImageEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    
+}

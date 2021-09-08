@@ -10,11 +10,12 @@ import { ItemEidtComponent } from '../item-eidt/item-eidt.component';
 export class ItemViewComponent implements OnInit {
 
   products: Item[] = [];
+  
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    
+   
     this.itemService.getItemsFromDB().subscribe(
     (firebaseItems) => {
     this.products = firebaseItems;

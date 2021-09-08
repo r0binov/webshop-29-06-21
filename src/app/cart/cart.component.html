@@ -3,14 +3,21 @@
 <div *ngIf="itemCount >= 1" > Ostukorvis on{{itemCount}}</div>
 <div *ngIf="itemCount == 0 ">Ostukorv on tühi</div>
 
-<div *ngFor="let inCart of itemsInCart">
-    <p class = "img"><img src="{{inCart.product.imgSrc}}" alt="">></p>
-    <p class="name"> {{inCart.product.title}}</p>
-    <p class = "price"> {{inCart.product.price | itemPrice}}</p>
-    <p class="quantity"> {{inCart.quantity}}</p>
-    <p class="total"> {{inCart.product.price * inCart.quantity | itemPrice}}</p>
-    <p class = "category"> {{inCart.product.category}}</p>
-    <button (click) = "onRemoveFromCart(inCart)">X</button>
+<div class="wrapper" *ngFor="let inCart of itemsInCart">
+    <p class = "img"><img src="{{inCart.product.imgSrc}}" alt=""></p>
+
+    <div class="wrapper-data">
+        <p class="name"> {{inCart.product.title}}</p>
+        <p class = "price"> {{inCart.product.price | itemPrice}}</p>
+    </div>
+        <span class="quantity-plus" (click) = "onRemoveOneFromCart(inCart)"><img src="https://e7.pngegg.com/pngimages/136/944/png-clipart-minus-minus.png" alt=""></span>
+        <p class="quantity"> {{inCart.quantity}}</p>
+        <span class="quantity-minus" (click) = "onAddToCart(inCart.product)"><img src="https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg" alt=""></span>
+        <p class="total"> {{inCart.product.price * inCart.quantity | itemPrice}}</p>
+        <p class = "category"> {{inCart.product.category}}</p>
+    
+
+    <span class="remove" (click) = "onRemoveFromCart(inCart)"><img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/trash-can-1778449-1515973.png" alt=""></span>
 </div>
 
-<div *ngIf="itemsInCart.length > 0">KOKKU: {{sumOfCart | itemPrice}}</div>
+<div class="finalPrice" *ngIf="itemsInCart.length > 0">KOKKU: {{sumOfCart | itemPrice}}</div>

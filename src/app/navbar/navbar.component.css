@@ -7,3 +7,9 @@
 .navbar p {
     font-size: 70px;
 }
+
+.language-buttons img {
+    height: 50px;
+    width: 50px;
+    margin-right: 5px;
+}

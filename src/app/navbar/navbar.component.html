@@ -6,9 +6,9 @@
     <a *ngIf="isLoggedIn" (click) = "onLogOut()">  {{'Logi Välja' | translate }}</a>
     
     
-    <div class="language-buttons">
-        <button (click)="useLanguage('en')">en</button>
-        <button (click)="useLanguage('ee')">ee</button>
+    <div>
+        <a class="language-buttons" (click)="useLanguage('en')"><img src="assets/estonia.png" alt=""></a>
+        <a class="language-buttons" (click)="useLanguage('ee')"><img src="assets/united-kingdom.png" alt=""></a>
     </div>
 
 </div>

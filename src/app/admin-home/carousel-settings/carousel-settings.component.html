@@ -28,18 +28,23 @@
     <button type= "submit" [disabled] = "addImageForm.invalid">Sisesta</button>
 </form>
 
-<div *ngFor="let img of images">
+<button (click) = "onSendImagesToDB()">Salvesta</button>
+
+<div *ngFor="let img of images; let i = index">
     <img src="{{img.url}}" alt="images">
     <div>{{img.header}}</div>
     <div>{{img.description}}</div>
     <div>{{img.alt}}</div>
 
     <div *ngIf="img.isEditState">
-        <form (ngSubmit)= "onEditImage()">
+        <!-- <form (ngSubmit)= "onEditImage()">
             <label>URL</label>
             <input type="text">
-        </form>
+        </form -->
+        <app-image-edit [carouselImage] = "img"
+        (imageChangedEvent) = "imageChanged($event, i)"></app-image-edit>
     </div>
     <button (click) = "onDeleteImage(img)">X</button>
     <button (click) = "onChangeImageDetails(img)"> Muuda</button>
 </div>
+

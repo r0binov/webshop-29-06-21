@@ -1,12 +1,16 @@
-<button (click) = "onItemActiveChange()" *ngIf="isLoggedIn">
-    <span *ngIf="!product.isActive"> Aktiivseks</span>
-    <span *ngIf="product.isActive"> Mitte aktiivseks</span>
-</button>
+<div class="wrapper">
+    <div class="wrapper-item">
+        <button (click) = "onItemActiveChange()" *ngIf="isLoggedIn">
+            <span *ngIf="!product.isActive"> Aktiivseks</span>
+            <span *ngIf="product.isActive"> Mitte aktiivseks</span>
+        </button>
 
-<div routerLink = "item/{{product.title}}">
-    <p class = "img"><img src="{{product.imgSrc}}" alt="">></p>
-    <p class="name"> {{product.title | shortenTitle: 4}}</p>
-    <p class = "price"> {{product.price | itemPrice}}</p>
-</div> 
+        <div routerLink = "item/{{product.title}}">
+            <p class = "img"><img src="{{product.imgSrc}}" alt=""></p>
+            <p class="name"> {{product.title | shortenTitle: 4}}</p>
+            <p class = "price"> {{product.price | itemPrice}}</p>
+        </div> 
 
-<button (click) = "onAddToCart(product)" class="addCart"> {{"Lisa ostukorvi" | translate}} </button>
+        <button class = "btn-addToCart" (click) = "onAddToCart(product)" class="addCart"> {{"Lisa ostukorvi" | translate}} </button>
+    </div>  
+</div>

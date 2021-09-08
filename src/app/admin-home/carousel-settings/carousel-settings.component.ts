@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Carousel } from 'src/app/models/carousel.model';
 import { CarouselService } from 'src/app/services/carousel.service';
@@ -11,11 +11,18 @@ import { CarouselService } from 'src/app/services/carousel.service';
 export class CarouselSettingsComponent implements OnInit {
 
   images: Carousel[] = [];
+  @Input() carouselImage = this.images;
+  
   carouselConfigForm!: FormGroup;
   constructor(private carouselService: CarouselService) { }
 
   ngOnInit(): void {
-    this.images = this.carouselService.getAllImages();
+    this.carouselService.getImgFromDB().subscribe(
+      (firebaseItems) => {
+      this.images = firebaseItems;
+      this.carouselService.saveToServiceFromDB(firebaseItems)});
+     
+
     this.carouselConfigForm = new FormGroup({
       interval: new FormControl(this.carouselService.interval),
       wrap: new FormControl(this.carouselService.wrap),
@@ -27,6 +34,8 @@ export class CarouselSettingsComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.carouselService.addImage(form.value);
     this.images = this.carouselService.getAllImages();
+    console.log(form.value);
+    
   }
 
   onDeleteImage (image: Carousel) {
@@ -40,13 +49,31 @@ export class CarouselSettingsComponent implements OnInit {
     this.carouselService.keyboard = this.carouselConfigForm.value.keyboard;
     this.carouselService.pauseOnHover = this.carouselConfigForm.value.pauseOnHover;
     this.carouselService.wrap = this.carouselConfigForm.value.wrap;
+    this.saveToLocalStorage();
   }
 
   onChangeImageDetails(image: Carousel) {
     image.isEditState = !image.isEditState;
   }
-  onEditImage() {
-    
+
+  onSendImagesToDB() {
+    this.carouselService.saveImgToDB().subscribe()
   }
+
+  onEditImage() {
+    this.carouselService.saveImgToDB().subscribe();
+  }
+  
+
+  saveToLocalStorage () {
+    localStorage.setItem("carouselConfig", JSON.stringify(this.carouselConfigForm));
+  }
+
+  imageChanged(image: Carousel, index: number) {
+    image.isEditState = false
+    this.carouselService.editImage(index, image).subscribe();
+  }
+  
+  
 
 }

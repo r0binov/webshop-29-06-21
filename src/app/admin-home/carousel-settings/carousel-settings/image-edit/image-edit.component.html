@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="editImageForm">
+    <label>URL</label> 
+    <input formControlName="url" type="text">
+    <label>Pealkiri</label> 
+    <input formControlName="header" type="text">
+    <label>Kirjeldus</label> 
+    <input formControlName="description" type="text">
+    <label>Alt</label> 
+    <input formControlName="alt" type="text">
+    <button>Salvesta</button>
+</form>

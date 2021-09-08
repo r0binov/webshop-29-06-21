@@ -29,7 +29,22 @@ export class CartService {
     this.productsInCart = [];
   }
 
-  deleteOneFromCart(index: number) {
-    this.productsInCart.splice(index, 1)
+  deleteOneFromCart(item: { product :Item, quantity: number }) : void {
+    let index = this.productsInCart.indexOf(item);
+    if (index != -1) {
+      if(this.productsInCart[index].quantity == 1){
+        this.deleteItemFromCart(index);
+      } else {
+        this.productsInCart[index].quantity--;
+      }
+    } 
+    console.log(index);
+    
   }
+
+  deleteItemFromCart(index: number): void {
+    this.productsInCart.splice(index, 1);
+  }
+
+
 }
